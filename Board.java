@@ -15,6 +15,11 @@ public class Board extends JPanel implements ActionListener {
 
     private Timer timer;
     private Score score;
+    private boolean paraDireita;
+    private boolean paraEsquerda;
+    private boolean paraCima;
+    private boolean paraBaixo;
+    private boolean pause;
     
     private boolean isPlaying = false;
 
@@ -81,25 +86,46 @@ public class Board extends JPanel implements ActionListener {
 
             switch (key){
                 case KeyEvent.VK_ENTER:
-                    score.addScore(100);
+                pause = true;
+            
                     break;
                     
                 case KeyEvent.VK_LEFT:
+                if ((key == KeyEvent.VK_LEFT) && (!paraDireita)) {
+                  paraEsquerda = true;
+                  paraCima = false;
+                  paraBaixo = false;
                     break;
+                }
                     
                 case KeyEvent.VK_RIGHT:
+                if ((key == KeyEvent.VK_RIGHT) && (!paraEsquerda)) {
+                 paraDireita = true;
+                 paraCima = false;
+                 paraBaixo = false;
                     break;
+                }
                     
                 case KeyEvent.VK_UP:
-                    score.addScore(10);
+                if ((key == KeyEvent.VK_UP) && (!paraBaixo)) {
+                    paraCima = true;
+                    paraDireita = false;
+                    paraEsquerda = false;
+            
                     break;
+                }
                     
                 case KeyEvent.VK_DOWN:
-                    score.subScore(-10);
+                if ((key == KeyEvent.VK_DOWN) && (!paraCima)) {
+                
+                    paraEsquerda = false;
+                    paraDireita = false;
+                    paraBaixo = true;
                     break;
-            }
+                }
             
         }
     }
     
+  }
 }
